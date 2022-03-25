@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library App</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./library.js" defer></script>
+</head>
+<body>
+    <header> Library</header>
+    
+    <div class="cardSection"></div>
+
+    <button onclick="showForm()">NEW BOOK</button>
+
+    <form id="newBookForm" onsubmit="addBook(event)">
+        <div class="formInput">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author">
+        </div>
+        <div class="formInput">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title">
+        </div>
+        <div class="formInput">
+            <label for="pages">Number of Pages</label>
+            <input type="text" id="pages" name="pages">
+        </div>
+        <div class="formInput">
+            <label for="readStatus">Completed?</label>
+            <input type="checkbox" id="readStatus" name="readStatus">
+        </div>
+        <div class = "submitSection">
+            <button class="addToLibraryBtn" type="submit">Add to Library</button>
+        </div>
+    </form>
+
+    
+</body>
+</html>
