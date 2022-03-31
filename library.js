@@ -1,4 +1,7 @@
-const cardSection = document.querySelector('.cardSection')
+const cardSection = document.querySelector('.cardSection');
+const newBookForm = document.getElementById('newBookForm');
+const addBookBtn = document.querySelector('.addBookBtn');
+const cancelBtn = document.querySelector('.cancelBtn');
 
 let myLibrary = [];
 
@@ -11,43 +14,9 @@ class Book {
     }
 }
 
-const book1 = new Book('JK Rowling', 'Harry Potter', 300, 'read');
-const book2 = new Book('George RR Martin', 'Game of Thrones', 1000, 'read');
-
-myLibrary.push(book1);
-myLibrary.push(book2);
-
-addCard();
-
-//takes every book in the myLibrary array and creates a new "card" with all the info in it. Can be cleaned up and probably use a loop or something OR just anything to make the code look nicer
-function addCard () {
-    myLibrary.forEach(book => {
-        card = document.createElement('div');
-        card.classList.add("cards");
-
-        titleSection = document.createElement('p');
-        title = document.createTextNode(book.title);
-        titleSection.appendChild(title);
-        card.appendChild(titleSection);
-
-        authorSection = document.createElement('p');
-        author = document.createTextNode(book.author);
-        authorSection.appendChild(author);
-        card.appendChild(authorSection);
-
-        pagesSection = document.createElement('p');
-        pages = document.createTextNode(book.pages);
-        pagesSection.appendChild(pages);
-        card.appendChild(pagesSection);
-
-        readStatusSection = document.createElement('p');
-        readStatus = document.createTextNode(book.readStatus);
-        readStatusSection.appendChild(readStatus);
-        card.appendChild(readStatusSection);
-
-        cardSection.appendChild(card)
-    })
-}
+addBookBtn.addEventListener('click', showForm)
+cancelBtn.addEventListener('click', hideForm)
+newBookForm.addEventListener('submit', addBook)
 
 function showForm() {
     document.getElementById('newBookForm').style.display = 'block';
@@ -55,29 +24,65 @@ function showForm() {
 
 function hideForm() {
     document.getElementById('newBookForm').style.display = 'none';
+    newBookForm.author.value = "";
+    newBookForm.title.value = "";
+    newBookForm.pages.value = "";
+    newBookForm.readStatus.checked = false;
 }
 
-function addBook(event) {
-    author = event.target.elements.author.value;
-    title = event.target.elements.title.value;
-    pages = event.target.elements.pages.value;
-    readStatus = event.target.elements.readStatus.value;
-
-    book3 = new Book(author, title, pages, readStatus);
-    myLibrary.push(book3);
+function addBook(e) {
+    e.preventDefault();
+    author = newBookForm.author.value;
+    title = newBookForm.title.value
+    pages = newBookForm.pages.value;
+    readStatus = newBookForm.readStatus.checked == true ? "Read" : "Unread";
+    myLibrary.push(new Book(author, title, pages, readStatus));
     addCard();
-
-
     hideForm();
 }
 
+//Always adds latest book in the myLibrary array and adds a new card for it on the book grid.
+function addCard () {
+    newBook = myLibrary.slice().pop();
+    createCard(newBook);
+}
 
-/*so,
-1. Make a "NEW BOOK" button that brings up a form.
-2. The form will ask for the author, title, pages, and read status
-3. Take this info and input it into a new const 'bookX' = new Book(user inputs)
-4. Take this new const and push it into the myLibrary array
-5. Write a function that will loop through the myLibrary array.
-6. for each item in the loop, take the info and add it to the cards (see below) 
-7. Use grid like we did before to create 'cards' which will display each book
-*/
+function removeCard(e) {
+    card = e.target.parentElement;
+    card.remove();
+}
+
+//given any book object, a card is created with all relevent info on it as well as a delete button
+function createCard (book) {
+    card = document.createElement('div');
+    card.classList.add("cards");
+
+    titleSection = document.createElement('p');
+    title = document.createTextNode(book.title);
+    titleSection.appendChild(title);
+    card.appendChild(titleSection);
+
+    authorSection = document.createElement('p');
+    author = document.createTextNode(book.author);
+    authorSection.appendChild(author);
+    card.appendChild(authorSection);
+
+    pagesSection = document.createElement('p');
+    pages = document.createTextNode(book.pages);
+    pagesSection.appendChild(pages);
+    card.appendChild(pagesSection);
+
+    readStatusSection = document.createElement('p');
+    readStatus = document.createTextNode(book.readStatus);
+    readStatusSection.appendChild(readStatus);
+    card.appendChild(readStatusSection);
+
+    deleteBtn = document.createElement('button');
+    deleteBtn.classList.add("deleteBtn");
+    deleteBtnText = document.createTextNode('Remove');
+    deleteBtn.appendChild(deleteBtnText);
+    deleteBtn.addEventListener('click', removeCard)
+    card.appendChild(deleteBtn);
+
+    cardSection.appendChild(card)
+}

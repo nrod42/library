@@ -7,13 +7,13 @@
     <script src="./library.js" defer></script>
 </head>
 <body>
-    <header> Library</header>
+    <header><div>Library</div></header>
     
     <div class="cardSection"></div>
 
-    <button onclick="showForm()">NEW BOOK</button>
+    <button class="addBookBtn">Add Book</button>
 
-    <form id="newBookForm" onsubmit="addBook(event)">
+    <form id="newBookForm">
         <div class="formInput">
             <label for="author">Author</label>
             <input type="text" id="author" name="author">
@@ -32,6 +32,7 @@
         </div>
         <div class = "submitSection">
             <button class="addToLibraryBtn" type="submit">Add to Library</button>
+            <button class="cancelBtn" type="button">Cancel</button>
         </div>
     </form>
 
