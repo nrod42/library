@@ -20,6 +20,8 @@ header {
     justify-content: center;
     align-items: center;
     height: 100px;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 #newBookForm {
@@ -27,7 +29,6 @@ header {
 }
 
 .cardSection {
-    
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -44,6 +45,20 @@ header {
     align-items: center;
 }
 
+.deleteBtn, .readStatusBtn {
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: solid black 1px;
+}
+
 .deleteBtn {
-    border: none;
+    background-color: lightcoral;
+}
+
+.addBookSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
 }

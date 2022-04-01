@@ -52,6 +52,10 @@ function removeCard(e) {
     card.remove();
 }
 
+function changeStatus(e) {
+    e.target.firstChild.textContent == 'Read' ? e.target.firstChild.textContent = 'Unread' : e.target.firstChild.textContent = 'Read';
+}
+
 //given any book object, a card is created with all relevent info on it as well as a delete button
 function createCard (book) {
     card = document.createElement('div');
@@ -72,10 +76,12 @@ function createCard (book) {
     pagesSection.appendChild(pages);
     card.appendChild(pagesSection);
 
-    readStatusSection = document.createElement('p');
-    readStatus = document.createTextNode(book.readStatus);
-    readStatusSection.appendChild(readStatus);
-    card.appendChild(readStatusSection);
+    readStatusBtn = document.createElement('button');
+    readStatusBtn.classList.add("readStatusBtn");
+    readStatusText = document.createTextNode(book.readStatus);
+    readStatusBtn.appendChild(readStatusText);
+    readStatusBtn.addEventListener('click', changeStatus)
+    card.appendChild(readStatusBtn);
 
     deleteBtn = document.createElement('button');
     deleteBtn.classList.add("deleteBtn");
