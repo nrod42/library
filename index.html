@@ -4,38 +4,33 @@
     <meta charset="UTF-8">
     <title>Library App</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
     <script src="./library.js" defer></script>
 </head>
 <body>
-    <header>myLibrary</header>
+    <header>myLibrary: Online Book Tracker</header>
     
     <div class="cardSection"></div>
 
-    <div class="addBookSection"><button class="addBookBtn">Add Book</button></div>
+    <button class="addBookBtn">+</button>
 
     <form id="newBookForm">
-        <div class="formInput">
-            <label for="author">Author</label>
-            <input type="text" id="author" name="author">
-        </div>
-        <div class="formInput">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title">
-        </div>
-        <div class="formInput">
-            <label for="pages">Number of Pages</label>
-            <input type="text" id="pages" name="pages">
-        </div>
-        <div class="formInput">
-            <label for="readStatus">Completed?</label>
-            <input type="checkbox" id="readStatus" name="readStatus">
-        </div>
-        <div class = "submitSection">
-            <button class="addToLibraryBtn" type="submit">Add to Library</button>
-            <button class="cancelBtn" type="button">Cancel</button>
-        </div>
-    </form>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author">
 
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
     
+        <label for="pages">Number of Pages:</label>
+        <input type="number" id="pages" name="pages">
+
+        <label for="readStatus">Completed?</label>
+        <input type="checkbox" id="readStatus" name="readStatus">
+
+        <button class="addToLibraryBtn" type="submit">Add to Library</button>
+        <button class="cancelBtn" type="button">Cancel</button>
+    </form>
 </body>
 </html>

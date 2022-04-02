@@ -2,6 +2,9 @@ const cardSection = document.querySelector('.cardSection');
 const newBookForm = document.getElementById('newBookForm');
 const addBookBtn = document.querySelector('.addBookBtn');
 const cancelBtn = document.querySelector('.cancelBtn');
+const bodyChildren = document.querySelectorAll('body > *:not(#newBookForm)');
+
+
 
 let myLibrary = [];
 
@@ -19,7 +22,8 @@ cancelBtn.addEventListener('click', hideForm)
 newBookForm.addEventListener('submit', addBook)
 
 function showForm() {
-    document.getElementById('newBookForm').style.display = 'block';
+    document.getElementById('newBookForm').style.display = 'grid';
+    bodyChildren.forEach(elem => elem.style.filter = 'blur(2px)');
 }
 
 function hideForm() {
@@ -28,6 +32,7 @@ function hideForm() {
     newBookForm.title.value = "";
     newBookForm.pages.value = "";
     newBookForm.readStatus.checked = false;
+    bodyChildren.forEach(child => child.style.filter = 'blur(0)');
 }
 
 function addBook(e) {
@@ -53,7 +58,8 @@ function removeCard(e) {
 }
 
 function changeStatus(e) {
-    e.target.firstChild.textContent == 'Read' ? e.target.firstChild.textContent = 'Unread' : e.target.firstChild.textContent = 'Read';
+    e.target.firstChild.textContent == 'Read' ? 
+    (e.target.firstChild.textContent = 'Unread', e.target.style.backgroundColor = 'lightcoral') : (e.target.firstChild.textContent = 'Read', e.target.style.backgroundColor = 'lightgreen');
 }
 
 //given any book object, a card is created with all relevent info on it as well as a delete button
@@ -72,7 +78,7 @@ function createCard (book) {
     card.appendChild(authorSection);
 
     pagesSection = document.createElement('p');
-    pages = document.createTextNode(book.pages);
+    pages = document.createTextNode(book.pages + ' Pages');
     pagesSection.appendChild(pages);
     card.appendChild(pagesSection);
 
@@ -80,6 +86,7 @@ function createCard (book) {
     readStatusBtn.classList.add("readStatusBtn");
     readStatusText = document.createTextNode(book.readStatus);
     readStatusBtn.appendChild(readStatusText);
+    readStatusText.textContent == 'Read' ? readStatusBtn.style.backgroundColor = 'lightgreen' : readStatusBtn.style.backgroundColor = 'lightcoral';
     readStatusBtn.addEventListener('click', changeStatus)
     card.appendChild(readStatusBtn);
 
